@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="format-detection" content="telephone=no" />
+            <title>首页</title>
+            
+            <style>
+                .ui-margin {
+                    width: 300px;
+                    height: 64px;
+                }
+            .ui-block-a {
+                font-size: 16px;
+                margin: 4px;
+                padding: 4px;
+                width: 180px;
+                height: 32px;
+            }
+            </style>
+            
+            <script type="text/javascript" src="cordova.js"></script>
+            <script type="text/javascript" src="js/index.js"></script>
+            
+            <script>
+                var JSObject = new Object();
+                JSObject.IsMobile = function () {
+                    return navigator.platform.indexOf('Win32') == -1;
+                };
+                JSObject.SupportCovdova = function () {
+                    return typeof (cordova) != "undefined";
+                };
+                JSObject.testCordovaPlugin = function() {
+                    console.log("testJS");
+                    //alert("IsMobile:"+this.IsMobile());
+                    //alert("SupportCovdova:"+this.SupportCovdova());
+                    if (!this.IsMobile() || !this.SupportCovdova()) {
+                        alert("不支持Cordova");
+                        return;
+                    }
+                    cordova.exec(null, null, "TestPluginName", "testPluginFunction", null);
+                };
+            </script>
+            
+            </head>
+    <body>
+        <div class="ui-margin"></div>
+        <div>
+            <input class="ui-block-a" type="button" value="调用插件" onclick="JSObject.testCordovaPlugin()" />
+        </div>
+    </body>
+</html>
+
+
+
+
